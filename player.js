@@ -1,4 +1,4 @@
-var preflopModule = require('./modules/preflop');
+//var preflopModule = require('./modules/preflop');
 module.exports = {
 
   VERSION: "Default JavaScript folding player",
