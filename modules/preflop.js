@@ -8,8 +8,7 @@ var isPremiumHand = function(hole_cards){
     if(first && second){
         return true;
     }
-        
-        return false;
+    return false;
 };
 
 var acehigh = function(hole_cards){

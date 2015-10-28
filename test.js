@@ -81,9 +81,7 @@ var hole_cards =  [{
             "rank": "A",
             "suit": "diamonds"
         }];
-                   
 console.log(preflopModule.isPremiumHand(hole_cards));
-
 
 hole_cards =  [{
             "rank": "A",
@@ -93,5 +91,4 @@ hole_cards =  [{
             "rank": "6",
             "suit": "diamonds"
         }];
-
 console.log(preflopModule.isPremiumHand(hole_cards));
