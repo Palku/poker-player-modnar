@@ -3,6 +3,9 @@ var betRatio = function(holeCards, communityCards) {
   // console.log(communityCards);
   var cCount = {};
   var topNumber = 0;
+  communityCards.forEach((c) => {
+      cCount[c.rank] = 1;
+  });
   holeCards.forEach((c) => {
     if (!cCount[c.rank]) {
       cCount[c.rank] = 1;
@@ -12,15 +15,7 @@ var betRatio = function(holeCards, communityCards) {
     if (cCount[c.rank] > topNumber)
       topNumber = cCount[c.rank];
   });
-  communityCards.forEach((c) => {
-    if (!cCount[c.rank]) {
-      cCount[c.rank] = 1;
-    } else {
-      cCount[c.rank]++;
-    }
-    if (cCount[c.rank] > topNumber)
-      topNumber = cCount[c.rank];
-  });
+
   if (topNumber > 1)
     return 1;
   return 0;
