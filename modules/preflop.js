@@ -1,14 +1,28 @@
 var preflop = require('./preflop');
 
 var isPremiumHand = function(hole_cards){
-  return true;
+      var r = hole_cards[0].rank;
+    var r2 = hole_cards[1].rank;
+    var first = (hole_cards[0].rank==="10" || r==="J" || r==="Q" || r==="K" || r==="A");
+    var second = (r2==="10" || r2==="J" || r2==="Q" || r2==="K" || r2==="A");
+    if(first && second){
+        return true;
+    }
+    return false;
 };
 
 var acehigh = function(hole_cards){
-  if(hole_cards[0].rank == "A"){
+  if(hole_cards[0].rank === "A" && !hole_cards[0].rank <= 6){
     return true;
   }
-  if(hole_cards[1].rank == "A"){
+  if(hole_cards[1].rank === "A"&& !hole_cards[0].rank <= 6){
+    return true;
+  }
+  return false;
+}
+
+var isPocketPair = function(hole_cards){
+  if(hole_cards[0].rank === hole_cards[1].rank){
     return true;
   }
   return false;
@@ -23,6 +37,9 @@ module.exports = {
       bet(10000000);
       return;
     }
+    if(isPocketPair(hole_cards)){
+      bet(10000000);
+    }
     if(isPremiumHand(hole_cards)){
       bet(game_state.minimum_raise);
       return;
@@ -30,5 +47,7 @@ module.exports = {
   },
 
   isPremiumHand: isPremiumHand,
-  isAceHigh: acehigh
+  isAceHigh: acehigh,
+  isPocketPair: isPocketPair
+
 }

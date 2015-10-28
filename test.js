@@ -73,5 +73,22 @@ player.bet_request(game_state, bet);
 
 console.log("isPremiumHand");
 var preflopModule = require('./modules/preflop');
-var hole_cards = {};
+var hole_cards =  [{
+            "rank": "A",
+            "suit": "diamonds"
+        },
+             {
+            "rank": "A",
+            "suit": "diamonds"
+        }];
+console.log(preflopModule.isPremiumHand(hole_cards));
+
+hole_cards =  [{
+            "rank": "A",
+            "suit": "diamonds"
+        },
+             {
+            "rank": "6",
+            "suit": "diamonds"
+        }];
 console.log(preflopModule.isPremiumHand(hole_cards));
