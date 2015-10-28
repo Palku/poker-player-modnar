@@ -12,10 +12,10 @@ var isPremiumHand = function(hole_cards){
 };
 
 var acehigh = function(hole_cards){
-  if(hole_cards[0].rank === "A" && !hole_cards[0].rank <= 6){
+  if(hole_cards[0].rank === "A" && !(hole_cards[1].rank <= 6)){
     return true;
   }
-  if(hole_cards[1].rank === "A"&& !hole_cards[0].rank <= 6){
+  if(hole_cards[1].rank === "A"&& !(hole_cards[0].rank <= 6)){
     return true;
   }
   return false;
@@ -49,5 +49,4 @@ module.exports = {
   isPremiumHand: isPremiumHand,
   isAceHigh: acehigh,
   isPocketPair: isPocketPair
-
 }
