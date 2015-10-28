@@ -5,7 +5,7 @@ module.exports = {
 
   bet_request: function(game_state, bet) {
     if (game_state.community_cards.length === 0) {
-      bet(preflopModule(eval));
+      preflop.eval(game_state, bet);
     } else {
       bet(game_state.players[game_state.in_action].stack);
       console.log(game_state);
