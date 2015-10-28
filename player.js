@@ -4,7 +4,8 @@ module.exports = {
   VERSION: "Default JavaScript folding player",
 
   bet_request: function(game_state, bet) {
-    bet(1000);
+
+    bet(game_state.players[game_state.in_action].stack);
     console.log(game_state);
   },
 
