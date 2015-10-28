@@ -73,4 +73,5 @@ player.bet_request(game_state, bet);
 
 console.log("isPremiumHand");
 var preflopModule = require('./modules/preflop');
-console.log(preflopModule.isPremiumHand({}));
+var hole_cards = {};
+console.log(preflopModule.isPremiumHand(hole_cards));
