@@ -1,10 +1,25 @@
+var getTopCard = function(top) {
+  topNumber = top;
+  if (top === "A")
+    topNumber = 14;
+  else if (top === "K")
+    topNumber = 13;
+  else if (top === "Q")
+    topNumber = 12;
+  else if (top === "J")
+    topNumber = 11;
+
+  return topNumber;
+}
 var betRatio = function(holeCards, communityCards) {
   // console.log(holeCards);
   // console.log(communityCards);
+
   var cCount = {};
   var colorC = {};
   var topNumber = 0;
   var colorNumber = 0;
+  var currentTopPairer;
   communityCards.forEach((c) => {
     cCount[c.rank] = 1;
     if (!colorC[c.suit])
@@ -20,8 +35,14 @@ var betRatio = function(holeCards, communityCards) {
     } else {
       cCount[c.rank]++;
     }
-    if (cCount[c.rank] > topNumber)
+    if (cCount[c.rank] > topNumber) {
       topNumber = cCount[c.rank];
+
+      currentTopPairer = getTopCard(c.rank);
+    } else if (cCount[c.rank] === topNumber) {
+      if (currentTopPairer < c.rank)
+        currentTopPairer = getTopCard(c.rank)
+    }
     if (!colorC[c.suit])
       colorC[c.suit] = 1;
     else
@@ -31,8 +52,16 @@ var betRatio = function(holeCards, communityCards) {
   });
   if (colorNumber >= 5)
     return 2;
-  if (topNumber > 1)
+  var overCards = 0;
+  if (topNumber > 1) {
+    communityCards.forEach((c) => {
+      if (c > currentTopPairer)
+        overCards++;
+    });
+    if (overCards >= 2)
+      return 0;
     return 1;
+  }
 
   return 0;
 }
