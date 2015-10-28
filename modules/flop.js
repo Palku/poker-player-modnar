@@ -2,9 +2,17 @@ var betRatio = function(holeCards, communityCards) {
   // console.log(holeCards);
   // console.log(communityCards);
   var cCount = {};
+  var colorC = {};
   var topNumber = 0;
+  var colorNumber = 0;
   communityCards.forEach((c) => {
-      cCount[c.rank] = 1;
+    cCount[c.rank] = 1;
+    if (!colorC[c.suit])
+      colorC[c.suit] = 1;
+    else
+      colorC[c.suit]++;
+    if (colorC[c.suit] > colorNumber)
+      colorNumber = colorC[c.suit];
   });
   holeCards.forEach((c) => {
     if (!cCount[c.rank]) {
@@ -14,10 +22,18 @@ var betRatio = function(holeCards, communityCards) {
     }
     if (cCount[c.rank] > topNumber)
       topNumber = cCount[c.rank];
+    if (!colorC[c.suit])
+      colorC[c.suit] = 1;
+    else
+      colorC[c.suit]++;
+    if (colorC[c.suit] > colorNumber)
+      colorNumber = colorC[c.suit];
   });
-
+  if (colorNumber >= 5)
+    return 2;
   if (topNumber > 1)
     return 1;
+
   return 0;
 }
 
