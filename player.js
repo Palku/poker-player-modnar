@@ -2,6 +2,7 @@
 var isPremiumHand = function(hole_cards){
   return true;
 };
+
 module.exports = {
 
   VERSION: "Default JavaScript folding player",
