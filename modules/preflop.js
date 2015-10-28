@@ -28,21 +28,25 @@ var isPocketPair = function(hole_cards){
   return false;
 }
 
+var call = function(game_state, bet){
+   bet(game_state.current_buy_in - game_state.players[game_state.in_action].bet);
+}
+
 module.exports = {
 
   eval: function(game_state,bet) {
     var player = game_state.players[game_state.in_action];
     var hole_cards = player.hole_cards;
     if(acehigh(hole_cards)){
-      bet(10000000);
+      call(game_state, bet);
       return;
     }
     if(isPocketPair(hole_cards)){
-      bet(10000000);
+      call(game_state, bet);
       return;
     }
     if(isPremiumHand(hole_cards)){
-      bet(game_state.minimum_raise);
+      call(game_state, bet);
       return;
     }
     bet(0);
