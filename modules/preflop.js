@@ -1,7 +1,15 @@
 var preflop = require('./preflop');
 
 var isPremiumHand = function(hole_cards){
-  return true;
+      var r = hole_cards[0].rank;
+    var r2 = hole_cards[1].rank;
+    var first = (hole_cards[0].rank==="10" || r==="J" || r==="Q" || r==="K" || r==="A");
+    var second = (r2==="10" || r2==="J" || r2==="Q" || r2==="K" || r2==="A");
+    if(first && second){
+        return true;
+    }
+        
+        return false;
 };
 
 var acehigh = function(hole_cards){
