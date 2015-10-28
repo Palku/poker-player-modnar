@@ -54,7 +54,11 @@ module.exports = {
       return;
     }
     if(isPocketPair(hole_cards)){
-      bet(234872434);
+      if(!expensiveCall(game_state) || isPremiumHand(hole_cards)){
+        bet(234872434);
+        return;
+      }
+      bet(0);
       //call(game_state, bet);
       return;
     }
