@@ -35,7 +35,7 @@ var game_state ={
                     "suit": "hearts"                // Suit of the card. Possible values are: clubs,spades,hearts,diamonds
                 },
                 {
-                    "rank": "K",
+                    "rank": "A",
                     "suit": "spades"
                 }
             ]
