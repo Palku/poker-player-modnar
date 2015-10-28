@@ -28,8 +28,15 @@ var isPocketPair = function(hole_cards){
   return false;
 }
 
+var expensiveCall = function(game_state){
+  var amount = game_state.current_buy_in - game_state.players[game_state.in_action].bet;
+  return amount > game_state.players[game_state.in_action].stack/2;
+}
+
 var call = function(game_state, bet){
-   bet(game_state.current_buy_in - game_state.players[game_state.in_action].bet);
+   var amount = game_state.current_buy_in - game_state.players[game_state.in_action].bet;
+
+   bet(amount);
 }
 
 module.exports = {
@@ -38,7 +45,12 @@ module.exports = {
     var player = game_state.players[game_state.in_action];
     var hole_cards = player.hole_cards;
     if(acehigh(hole_cards)){
-      call(game_state, bet);
+      if(!expensiveCall(game_state)){
+        call(game_state, bet);
+      }
+      else {
+        bet(0);
+      }
       return;
     }
     if(isPocketPair(hole_cards)){
@@ -47,7 +59,14 @@ module.exports = {
       return;
     }
     if(isPremiumHand(hole_cards)){
-      call(game_state, bet);
+      if(!expensiveCall(game_state)){
+        call(game_state, bet);
+      }
+      else if(acehigh(hole_cards)){
+        call(game_state, bet);
+      }
+      else
+        bet(0);
       return;
     }
     bet(0);
