@@ -5,10 +5,17 @@ var isPremiumHand = function(hole_cards){
 };
 
 var acehigh = function(hole_cards){
-  if(hole_cards[0].rank == "A"){
+  if(hole_cards[0].rank === "A" && !hole_cards[0].rank <= 6){
     return true;
   }
-  if(hole_cards[1].rank == "A"){
+  if(hole_cards[1].rank === "A"&& !hole_cards[0].rank <= 6){
+    return true;
+  }
+  return false;
+}
+
+var isPocketPair = function(hole_cards){
+  if(hole_cards[0].rank === hole_cards[1].rank){
     return true;
   }
   return false;
@@ -23,6 +30,9 @@ module.exports = {
       bet(10000000);
       return;
     }
+    if(isPocketPair(hole_cards)){
+      bet(10000000);
+    }
     if(isPremiumHand(hole_cards)){
       bet(game_state.minimum_raise);
       return;
@@ -30,5 +40,7 @@ module.exports = {
   },
 
   isPremiumHand: isPremiumHand,
-  isAceHigh: acehigh
+  isAceHigh: acehigh,
+  isPocketPair: isPocketPair
+
 }
