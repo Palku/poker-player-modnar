@@ -39,11 +39,14 @@ module.exports = {
     }
     if(isPocketPair(hole_cards)){
       bet(10000000);
+      return;
     }
     if(isPremiumHand(hole_cards)){
       bet(game_state.minimum_raise);
       return;
     }
+    bet(0);
+    return;
   },
 
   isPremiumHand: isPremiumHand,
